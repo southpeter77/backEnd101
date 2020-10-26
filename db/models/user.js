@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       unique: true,
       allowNull: false
     },
@@ -10,8 +10,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING.BINARY,
       allowNull: false
     },
-    aboutMe: DataTypes.STRING,
-    trainer: DataTypes.BOOLEAN,
+    aboutMe: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    trainer: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -28,6 +34,15 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function (models) {
     // associations can be defined here
+    User.hasMany(models.Plan, { foreignKey: "ownerUserId" })
+
+    const columnMapping = {
+      through: "UserToPlan",
+      otherKey: "planId",
+      foreignKey: "userId"
+    }
+    User.belongsToMany(models.Plan, columnMapping)
+
   };
   return User;
 };
