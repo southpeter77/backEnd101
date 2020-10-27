@@ -10,13 +10,18 @@ const app = express();
 ////////////////////////////////////////////////////////////
 // app.set('view engine', 'pug');
 app.use(morgan('dev'));
+app.use(cookieParser())
 
-app.use(cors({ origin: "http://localhost:3000" }));
-// app.use(cors({ origin: true }));
+// app.use(cors())
+// app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //////////////routes////////////////////
+app.get("/", (req,res) => {
+  res.json({message:"hi"})
+})
 app.use(routes);
 
 ////////////////////////////////////////////////////////////
@@ -30,10 +35,11 @@ app.use(function (err, _req, res, _next) {
   if (err.status === 401) {
     res.set('WWW-Authenticate', 'Bearer');
   }
-  res.json({
-    message: err.message,
-    error: JSON.parse(JSON.stringify(err)),
-  });
+  // res.json({
+  //   message: err.message,
+  //   error: JSON.parse(JSON.stringify(err)),
+  // });
+  res.json({message:"wow"})
 });
 
 
