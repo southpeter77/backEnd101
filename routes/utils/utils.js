@@ -20,6 +20,21 @@ const handleValidationErrors = (req, res, next) => {
     next();
 }
 
+const validateUserEmailAndPassword = [
+    check('email')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Email Address')
+    .isLength({ max: 255 })
+    .withMessage('Email Address must not be more than 255 characters long')
+    .isEmail()
+    .withMessage('Email Address is not a valid email'),
+    check("password")
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for Password')
+        .isLength({ max: 20 })
+        .withMessage("Please provide a valid password with max 20 characters"),
+]
+
 const validateSignUpUser = [
     check("aboutMe")
         .exists({checkFalsy:true})
@@ -72,5 +87,6 @@ const validateSignUpUser = [
 module.exports = {
     asyncHandler,
     handleValidationErrors,
-    validateSignUpUser
+    validateSignUpUser,
+    validateUserEmailAndPassword
 }

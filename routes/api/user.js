@@ -21,8 +21,28 @@ routes.post('/signup', validateSignUpUser, handleValidationErrors, asyncHandler(
 
 }));
 
-routes.get("/", (req, res) => {
-
+//////////log-in/////////////////////////////
+routes.put("/",validateUserEmailAndPassword, handleValidationErrors, asyncHandler(async(req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const user = await db.User.findOne({
+    where: { email: email }
+});
+const passwordsMatch = await bcrypt.compareSync(password, user.hashedPassword.toString())
+if (!user || !passwordsMatch) {
+  const err = new Error("Login failed");
+  err.status = 401;
+  err.title = "Login failed";
+  err.errors = ["The provided credentials were invalid."];
+  return next(err);
+}
+const token = getUserToken(user);
+res.json({
+  token, userId:user.id
 })
+}))
+
+
+/////////log-out//////////////////////????????????
 
 module.exports = routes;
