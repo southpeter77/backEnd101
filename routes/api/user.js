@@ -1,25 +1,27 @@
 const express = require('express');
 const routes = express.Router();
 const { check, validationResult } = require('express-validator');
-const { asyncHandler, handleValidationErrors } = require('../../utils');
+const { asyncHandler, handleValidationErrors, validateSignUpUser } = require('../utils/utils');
 const db = require('../../db/models')
 const bcrypt = require("bcryptjs");
+const {getUserToken} = require("../utils/auth")
 
 ////////sign-up api////////////
-routes.post('/signup', (req, res, next) => {
-  // const {email, password, aboutMe, trainer, firstName, lastName, started_training_year, balance} = req.body;
-  // const user = {email, password, aboutMe, trainer, firstName, lastName, started_training_year, balance}
-  const result = req.body
-  
-  console.log(result)
+routes.post('/signup', validateSignUpUser, handleValidationErrors, asyncHandler(async (req, res, next) => {
+  const { email, password, aboutMe, trainer, firstName, lastName, started_training_year, balance } = req.body;
 
-  res.json(result)
-});
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const userData = {email, hashedPassword, aboutMe, trainer, firstName, lastName, started_training_year, balance}
+  const user = await db.User.create(userData);
+  const token = getUserToken(user);
 
-routes.get("/", (req,res) => {
-  console.log("hi")
-  const data =JSON.parse(req.body);
-  
+  res.status(201).json({
+    token, userId:user.id
+  })
+
+}));
+
+routes.get("/", (req, res) => {
 
 })
 
