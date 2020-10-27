@@ -1,0 +1,6 @@
+###
+POST http://localhost:8000/api/user/signup 
+header:{"content-type": "application/json"},
+body: JSON.strigyfy(
+ {"email": "holulululu@gmail.com"})
+###
