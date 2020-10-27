@@ -43,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
     }
     User.belongsToMany(models.Plan, columnMapping)
     User.hasMany(models.Image, { foreignKey: 'userId' })
+    User.hasMany(models.Review, { foreignKey: 'userId' })
+    User.hasMany(models.Order, { foreignKey: 'userId' })
+
     
 
   };

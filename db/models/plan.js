@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
     Plan.belongsTo(models.Category, {foreignKey: "categoryId"})
     Plan.hasMany(models.Exercise, {foreignKey:"planId"})
     Plan.hasMany(models.Image, { foreignKey: 'planId' })
+    Plan.hasMany(models.Review, { foreignKey: 'planId' })
+    Plan.hasMany(models.OrderItems, { foreignKey: 'planId' })
+
 
   
   };
