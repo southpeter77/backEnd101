@@ -20,8 +20,8 @@ validateSignUpUser, handleValidationErrors,
 asyncHandler(async (req, res, next) => {
   const { email, password, aboutMe, trainer, firstName, lastName, started_training_year, balance } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await db.User.create({email, hashedPassword, aboutMe, trainer, firstName, lastName, started_training_year, balance:0} );
-  const token = getUserToken(user);
+    const user = await db.User.create({email, hashedPassword, aboutMe, trainer, firstName, lastName, started_training_year, balance:0} );
+    const token = getUserToken(user);
 
   res.status(201).json({
     token, userId:user.id

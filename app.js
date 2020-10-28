@@ -35,11 +35,13 @@ app.use(function (err, _req, res, _next) {
   if (err.status === 401) {
     res.set('WWW-Authenticate', 'Bearer');
   }
+  // console.log(err.errors)
   // res.json({
   //   message: err.message,
   //   error: JSON.parse(JSON.stringify(err)),
   // });
-  res.json({message:"wow"})
+  console.log("hi")
+  res.json({error:err.errors})
 });
 
 
