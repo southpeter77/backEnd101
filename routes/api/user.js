@@ -5,7 +5,7 @@ const { asyncHandler, handleValidationErrors, validateSignUpUser,validateUserEma
 const db = require('../../db/models')
 const bcrypt = require("bcryptjs");
 const {getUserToken} = require("../utils/auth");
-const {User} = db
+const {User, Plan, Image,} = db
 
 //test
 routes.get('/', asyncHandler(async (req, res)=> {
@@ -30,24 +30,56 @@ asyncHandler(async (req, res, next) => {
 
 //////////log-in/////////////////////////////
 routes.put("/",validateUserEmailAndPassword, handleValidationErrors, asyncHandler(async(req, res, next) => {
+
   const email = req.body.email;
   const password = req.body.password;
   const user = await db.User.findOne({
     where: { email: email }
 });
-const passwordsMatch = await bcrypt.compareSync(password, user.hashedPassword.toString())
-if (!user || !passwordsMatch) {
+
+
+if(user===null) {
+
   const err = new Error("Login failed");
   err.status = 401;
   err.title = "Login failed";
   err.errors = ["The provided credentials were invalid."];
+
   return next(err);
 }
+const passwordsMatch = await bcrypt.compareSync(password, user.hashedPassword.toString())
+if (!passwordsMatch) {
+  const err = new Error("Login failed");
+  err.status = 401;
+  err.title = "Login failed";
+  err.errors = ["The provided credentials were invalid."];
+
+  return next(err);
+}
+
 const token = getUserToken(user);
 res.json({
   token, userId:user.id
 })
 }))
+
+
+
+//////////////grab user info from id//////////
+routes.get("/:id", asyncHandler(async(req,res) => {
+  const userId = parseInt(req.params.id);
+
+  const user = await db.User.findByPk(userId, {
+    include :[Plan, Image]
+  });
+  
+  res.json(user)
+}))
+
+
+
+
+
 
 
 /////////log-out//////////////////////????????????

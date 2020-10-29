@@ -40,7 +40,6 @@ app.use(function (err, _req, res, _next) {
   //   message: err.message,
   //   error: JSON.parse(JSON.stringify(err)),
   // });
-  console.log("hi")
   res.json({error:err.errors})
 });
 
