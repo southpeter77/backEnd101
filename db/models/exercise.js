@@ -9,14 +9,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull:false
     },
-    planId: {
-      type:DataTypes.INTEGER,
-       allowNull: false}
+    // planId: {
+    //   type:DataTypes.INTEGER,
+    //    allowNull: false}
   }, {});
   Exercise.associate = function(models) {
     // associations can be defined here
-    Exercise.belongsTo(models.Plan, {foreignKey: "planId"})
+    // Exercise.belongsTo(models.Plan, {foreignKey: "planId"})
     Exercise.hasMany(models.Image, { foreignKey: 'exerciseId' })  
+const columnMapping ={
+  through: "ExerciseToPlan",
+  otherKey:"planId",
+  foreignKey:"exerciseId"
+}
+Exercise.belongsToMany(models.Plan, columnMapping)
+
   };
   return Exercise;
 };

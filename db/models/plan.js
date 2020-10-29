@@ -35,12 +35,19 @@ module.exports = (sequelize, DataTypes) => {
 
     Plan.belongsToMany(models.User, columnMapping)
     Plan.belongsTo(models.Category, {foreignKey: "categoryId"})
-    Plan.hasMany(models.Exercise, {foreignKey:"planId"})
+    // Plan.hasMany(models.Exercise, {foreignKey:"planId"})
     Plan.hasMany(models.Image, { foreignKey: 'planId' })
     Plan.hasMany(models.Review, { foreignKey: 'planId' })
     Plan.hasMany(models.OrderItems, { foreignKey: 'planId' })
 
+    const planToExercise = {
+      through:"ExerciseToPlan",
+      otherKey:"exerciseId",
+      foreignKey:"planId"
+    }
+    Plan.belongsToMany(models.Exercise, planToExercise)
 
+    
   
   };
   return Plan;
