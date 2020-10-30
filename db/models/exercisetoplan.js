@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ExerciseToPlan.associate = function(models) {
     // associations can be defined here
+    ExerciseToPlan.belongsTo(models.Plan, {foreignKey:"planId"})
+    ExerciseToPlan.belongsTo(models.Exercise, {foreignKey:"exerciseId"})
+
+
   };
   return ExerciseToPlan;
 };

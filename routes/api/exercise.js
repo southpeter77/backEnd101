@@ -15,7 +15,12 @@ routes.get("/all", asyncHandler(async (req,res,next) => {
 }))
 
 routes.post("/create", asyncHandler(async (req,res,next)=> {
-    const {pickedExercise,userId,description} = req.body;
+    const {title,imageId,userId,description} = req.body;
+
+    const newExercise = await db.Exercise.create({
+        title, imageId, description
+    })
+
     console.log(req.body)
 
 }))

@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   UserToPlan.associate = function(models) {
     // associations can be defined here
+    UserToPlan.belongsTo(models.Plan, {foreignKey:"planId"})
+    UserToPlan.belongsTo(models.User, {foreignKey:"userId"})
+
+
   };
   return UserToPlan;
 };
