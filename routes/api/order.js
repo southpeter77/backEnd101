@@ -25,15 +25,15 @@ const {OrderItems, Order, Plan, User} = db
 routes.put("/all", asyncHandler( async(req,res,next) => {
     const {currentUserId} = req.body
 
-    const order = await Plan.findAll({
+    const orderItems = await Plan.findAll({
         include: {
-            model: OrderItems,
-            attributes:[orderId]
+            model:Order,
+            where:{
+                userId:currentUserId
+            }
         }
     })
-
-    console.log(currentUserId)
-    res.json(order)
+    res.json(orderItems)
 
 }))
 

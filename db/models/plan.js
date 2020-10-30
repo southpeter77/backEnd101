@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     // Plan.hasMany(models.Exercise, {foreignKey:"planId"})
     Plan.hasMany(models.Image, { foreignKey: 'planId' })
     Plan.hasMany(models.Review, { foreignKey: 'planId' })
-    Plan.hasMany(models.OrderItems, { foreignKey: 'planId' })
+    // Plan.hasMany(models.OrderItems, { foreignKey: 'planId' })
 
     const planToExercise = {
       through:"ExerciseToPlan",
@@ -47,6 +47,14 @@ module.exports = (sequelize, DataTypes) => {
     }
     Plan.belongsToMany(models.Exercise, planToExercise)
 
+
+    const planToOrder = {
+      through: "OrderItems",
+      otherKey:"orderId",
+      foreignKey: "planId"
+    }
+
+    Plan.belongsToMany(models.Order,planToOrder)
     
   
   };

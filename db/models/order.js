@@ -9,7 +9,14 @@ module.exports = (sequelize, DataTypes) => {
   Order.associate = function(models) {
     // associations can be defined here
     Order.belongsTo(models.User,  { foreignKey: 'userId' })
-    Order.hasMany(models.OrderItems, { foreignKey: 'orderId' })
+
+    const columnMapping  = {
+      through: "OrderItems",
+      otherKey:"planId",
+      foreignKey: "orderId"
+    }
+
+    Order.belongsToMany(models.Plan, columnMapping)
   };
   return Order;
 };
