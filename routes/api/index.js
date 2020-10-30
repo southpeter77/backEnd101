@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const routes = ["user", "plan", "profile", "category","exercise","images"];
+const routes = ["user","review", "plan", "profile", "category","exercise","images","order"];
 
 for (let route of routes) {
   router.use(`/${route}`, require(`./${route}`));
