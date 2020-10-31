@@ -12,9 +12,9 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser())
 
-// app.use(cors())
+app.use(cors())
 // app.use(cors({ origin: "http://localhost:3000" }));
-app.use(cors({ origin: true }));
+// app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
