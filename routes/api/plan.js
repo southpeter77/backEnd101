@@ -58,7 +58,12 @@ asyncHandler(async(req,res,next) => {
     res.json(plan)
 }))
 
-
+//delete plan /////////////////
+routes.delete("/delete",
+asyncHandler(async(req,res,next) => {
+    const {id} = req.body;
+    console.log(id)
+}))
 
 
 module.exports = routes;
