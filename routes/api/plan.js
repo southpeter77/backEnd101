@@ -2,7 +2,7 @@ const express = require('express');
 const routes = express.Router();
 const db = require('../../db/models')
 const { asyncHandler,handleValidationErrors } = require('../utils/utils');
-const {Image, Category, User,ExerciseToPlan, Exercise} = db
+const {Image, Category, User,ExerciseToPlan, Exercise, Plan} = db
 const {requireAuth} = require("../utils/auth");
 const { check, validationResult } = require('express-validator');
 
@@ -62,7 +62,23 @@ asyncHandler(async(req,res,next) => {
 routes.delete("/delete",
 asyncHandler(async(req,res,next) => {
     const {id} = req.body;
-    console.log(id)
+//     const reviews = await db.Review.destroy({
+//         where:{
+//             planId:id
+//         }
+//     })
+// const exercises = await db.Exercise.findAll({
+//    include:{
+//        model:Plan,
+//        where:{
+//            id
+//        }
+//    }
+//     })
+//     // exercises.destroy() 
+    //    const plan = await db.Plan.destroy({where:{id}})
+
+    res.json()
 }))
 
 
