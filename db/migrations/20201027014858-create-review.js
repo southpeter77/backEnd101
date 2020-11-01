@@ -24,7 +24,8 @@ module.exports = {
       planId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "Plans" }
+        references: { model: "Plans" },
+        onDelete:"CASCADE"
       },
       createdAt: {
         allowNull: false,

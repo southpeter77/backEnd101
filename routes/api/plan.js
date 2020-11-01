@@ -67,18 +67,19 @@ asyncHandler(async(req,res,next) => {
 //             planId:id
 //         }
 //     })
-// const exercises = await db.Exercise.findAll({
-//    include:{
-//        model:Plan,
-//        where:{
-//            id
-//        }
-//    }
-//     })
-//     // exercises.destroy() 
-    //    const plan = await db.Plan.destroy({where:{id}})
-
-    res.json()
+const exercises = await db.Exercise.findAll({
+   include:{
+       model:Plan,
+       where:{
+           id
+       }
+   }
+    })
+  
+    
+       const plan = await db.Plan.destroy({where:{id}})
+exercises.map(each => each.destroy())
+    res.json(exercises)
 }))
 
 
