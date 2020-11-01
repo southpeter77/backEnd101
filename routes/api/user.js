@@ -23,6 +23,16 @@ asyncHandler(async (req, res, next) => {
     const user = await db.User.create({email, hashedPassword, aboutMe, trainer, firstName, lastName, started_training_year, balance:0} );
     const token = getUserToken(user);
 
+//
+//add image.
+const image = await db.Image.create({
+  url:"defaultProfile",
+  userId: user.id
+})
+
+// console.log(image)
+
+//
   res.status(201).json({
     token, userId:user.id
   })
@@ -72,6 +82,7 @@ routes.get("/:id", asyncHandler(async(req,res) => {
   const user = await db.User.findByPk(userId, {
     include :[Plan, Image]
   });
+  // console.log(user)
   
   res.json(user)
 }))

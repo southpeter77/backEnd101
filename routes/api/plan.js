@@ -19,8 +19,27 @@ routes.get("/top", asyncHandler (async (req,res)=> {
     const plans = await db.Plan.findAll({
         include: [Image,Category, User]
     });
+
+
     res.json(plans)
+
+  
 }))
+routes.get('/test', asyncHandler(async(req,res,next) =>  {
+
+  const usersImage = await db.Plan.findAll({
+      include:{
+          model:User,
+          include:{
+              model:Image
+          }
+      }
+  })
+  const usersValue = Object.values(usersImage).map(each=> each.User.Images[0])
+res.json(usersValue)
+}))
+
+
 ///////////grab plan by id
 routes.get("/:id", asyncHandler(async (req,res) => {
 const id = req.params.id;
