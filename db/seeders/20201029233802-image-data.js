@@ -115,6 +115,47 @@ module.exports = {
   updatedAt: new Date()
   
 },
+{
+  url:"defaultProfile",
+  userId: 1,
+  createdAt: new Date(),
+  updatedAt: new Date()
+  
+},
+{
+  url:"defaultProfile",
+  userId: 2,
+  createdAt: new Date(),
+  updatedAt: new Date()
+  
+},
+{
+  url:"defaultProfile",
+  userId: 3,
+  createdAt: new Date(),
+  updatedAt: new Date()
+  
+},
+{
+  url:"defaultProfile",
+  userId: 4,
+  createdAt: new Date(),
+  updatedAt: new Date()
+  
+},
+{
+  url:"defaultProfile",
+  userId: 5,
+  createdAt: new Date(),
+  updatedAt: new Date()
+  
+},{
+  url:"defaultProfile",
+  userId: 6,
+  createdAt: new Date(),
+  updatedAt: new Date()
+  
+},
 
       ], {});
    

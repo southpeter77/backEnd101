@@ -55,9 +55,11 @@ const planOwner = {
     planOwnerAboutMe: planCategoryUser.User.aboutMe,
     planOwnerYear: planCategoryUser.User.started_training_year,
     planCategory: planCategoryUser.Category.categoryName,
-    exercises: planCategoryUser.Exercises
+    exercises: planCategoryUser.Exercises,
+    planOwnerId: planCategoryUser.User.id
 
 }
+// console.log(planCategoryUser.User.id)
 res.json(planOwner)
 
 }))

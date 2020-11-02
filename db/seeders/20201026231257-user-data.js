@@ -8,7 +8,7 @@ module.exports = {
       {
         email: 'johnSmith@gmail.com',
         aboutMe: "Hiy my name is John and I like to work out",
-        hashedPassword: 'EiGG79H1o0UvbPrGV1gWjSSxOZlSLr',
+        hashedPassword: bcrypt.hashSync("123", 10),
         trainer: false,
         firstName: "John",
         lastName: "Smith",
@@ -20,7 +20,7 @@ module.exports = {
       {
         email: 'JamesSmithy@gmail.com',
         aboutMe: "This app is so awesoem! I'm James BTW.",
-        hashedPassword: 'EiGG79H1o0UvbPrGV1gWjSSxOZlSLr',
+        hashedPassword: bcrypt.hashSync("123", 10),
         trainer: false,
         firstName: "James",
         lastName: "smithy",
@@ -32,7 +32,7 @@ module.exports = {
       {
         email: 'AdamApple@gmail.com',
         aboutMe: "Work out every day. Eat an apple everyday",
-        hashedPassword: 'EiGG79H1o0UvbPrGV1gWjSSxOZlSLr',
+        hashedPassword: bcrypt.hashSync("123", 10),
         trainer: true,
         firstName: "Adamn",
         lastName: "Apple",
@@ -44,7 +44,7 @@ module.exports = {
       {
         email: 'BRyan@gmail.com',
         aboutMe: "I will provide you the best work out plan.",
-        hashedPassword: 'EiGG79H1o0UvbPrGV1gWjSSxOZlSLr',
+        hashedPassword: bcrypt.hashSync("123", 10),
         trainer: true,
         firstName: "Brian",
         lastName: "Ryan",
@@ -56,7 +56,7 @@ module.exports = {
       {
         email: 'RYANryan@gmail.com',
         aboutMe: "Been training since 2017. Im so strong.",
-        hashedPassword: 'EiGG79H1o0UvbPrGV1gWjSSxOZlSLr',
+        hashedPassword: bcrypt.hashSync("123", 10),
         trainer: false,
         firstName: "Ryan",
         lastName: "Ryan",
