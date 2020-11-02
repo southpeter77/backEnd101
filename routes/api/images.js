@@ -9,7 +9,11 @@ const upload = multer();
 
 
 routes.get("/all", asyncHandler(async (req,res,next) => {
-    const list = await db.Image.findAll();
+    const list = await db.Image.findAll({
+      where: {
+        userId:null
+      }
+    });
     res.json(list)
 
 }))
