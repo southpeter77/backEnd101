@@ -6,7 +6,7 @@ const { asyncHandler} = require('../utils/utils');
 
 routes.post("/create",asyncHandler(async(req,res,next) => {
     const {currentPlanId, currentUserId} = req.body
-    console.log(currentPlanId, currentUserId)
+    // console.log(currentPlanId, currentUserId)
 
     const order = await db.Order.create({
         userId:currentUserId
