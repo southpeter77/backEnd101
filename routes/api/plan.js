@@ -44,9 +44,18 @@ res.json(usersValue)
 routes.get("/:id", asyncHandler(async (req,res) => {
 const id = req.params.id;
 
+// const planCategoryUser = await db.Plan.findByPk(id,{
+//     include:[Category, User, Exercise]
+// })
 const planCategoryUser = await db.Plan.findByPk(id,{
-    include:[Category, User, Exercise]
+    include:[
+        {model:Category},
+        {model:Exercise},
+        {model:User, include:{model:Image}}
+    ]
 })
+// console.log(planCategoryUser.User.Images)
+
 const planOwner = {
     planDescription: planCategoryUser.description,
     planTitle: planCategoryUser.title,
@@ -56,7 +65,8 @@ const planOwner = {
     planOwnerYear: planCategoryUser.User.started_training_year,
     planCategory: planCategoryUser.Category.categoryName,
     exercises: planCategoryUser.Exercises,
-    planOwnerId: planCategoryUser.User.id
+    planOwnerId: planCategoryUser.User.id,
+    planOwnerImage: planCategoryUser.User.Images[0].url
 
 }
 // console.log(planCategoryUser.User.id)
